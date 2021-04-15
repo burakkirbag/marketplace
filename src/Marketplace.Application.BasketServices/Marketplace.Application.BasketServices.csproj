@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>Marketplace</RootNamespace>
+    <RootNamespace>Marketplace.Baskets</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using Marketplace.Domain.Events;
 using System.Collections.Generic;
+using MongoDB.Bson;
 
 namespace Marketplace.Domain.Entities
 {
@@ -7,9 +8,9 @@ namespace Marketplace.Domain.Entities
     {
         public string Id { get; set; }
 
-        public IReadOnlyCollection<IDomainEvent> Events { get; }
+        public bool HasEvents();
 
-        public void AddEvent(IDomainEvent @event);
+        public IEnumerable<IDomainEvent> GetEvents();
 
         public void ClearEvents();
     }

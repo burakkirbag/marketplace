@@ -9,12 +9,4 @@
     <ProjectReference Include="..\Marketplace.Domain.Shared\Marketplace.Domain.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Cart\" />
-    <Folder Include="Customers\Exceptions\" />
-    <Folder Include="Customers\Rules\" />
-    <Folder Include="Products\Services\" />
-    <Folder Include="Products\Rules\" />
-  </ItemGroup>
-
 </Project>

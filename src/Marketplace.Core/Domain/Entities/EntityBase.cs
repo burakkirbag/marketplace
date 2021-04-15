@@ -4,6 +4,8 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace Marketplace.Domain.Entities
 {
@@ -13,24 +15,28 @@ namespace Marketplace.Domain.Entities
         [BsonRepresentation(BsonType.ObjectId)]
         public virtual string Id { get; set; }
 
-        private List<IDomainEvent> _events;
+        public override string ToString() => $"[{GetType().Name} {Id}]";
+
+        private List<IDomainEvent> _events = new List<IDomainEvent>();
 
         public IReadOnlyCollection<IDomainEvent> Events => _events?.AsReadOnly();
 
-        public void AddEvent(IDomainEvent @event)
+        public bool HasEvents() => _events.Any();
+
+        public IEnumerable<IDomainEvent> GetEvents() => _events;
+
+        public void ClearEvents() => _events.Clear();
+
+        protected void AddEvent(IDomainEvent @event)
         {
             _events ??= new List<IDomainEvent>();
             _events.Add(@event);
         }
 
-        public void ClearEvents()
-        {
-            _events?.Clear();
-        }
-
         protected static void CheckRule(IBusinessRule rule)
         {
-            if (rule.IsBroken()) throw new BusinessRuleValidationException(rule);
+            if (rule.IsBroken())
+                throw new BusinessRuleValidationException(rule);
         }
     }
 }

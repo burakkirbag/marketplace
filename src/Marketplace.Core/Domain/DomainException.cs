@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace Marketplace.Domain
 {
     [Serializable]
-    public abstract class DomainException : Exception
+    public abstract class DomainException : MarketplaceException
     {
         protected DomainException()
         {

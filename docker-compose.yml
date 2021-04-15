@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  marketplace-mongo:
+    container_name: marketplace-mongo
+    image: mongo:latest
+    restart: always
+    ports:
+      - 37017:27017
+    networks:
+      - marketplace-localhost
+    restart: always
+
+  marketplace-api:
+    container_name: marketplace-api
+    image: marketplace-api
+    build:
+      context: .
+      dockerfile: Dockerfile    
+    ports:
+      - 12001:5000
+    links:
+      - marketplace-mongo
+    depends_on:
+      - "marketplace-mongo"
+    networks:
+      - marketplace-localhost
+
+networks:
+  marketplace-localhost:
+    driver: bridge
